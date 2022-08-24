@@ -1,0 +1,26 @@
+name: Auto pull
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: Pull on develop
+      uses: appleboy/ssh-action@master
+      with:
+      #ssh:
+        host: 54.70.189.151
+        username: ec2-user
+        password: ${{ secrets.SERVER_PEM }}
+        timeout: 60s
+        script: | 
+         cd /var/www/html
+         rm -rf *
+         git stash
+         git pull origin master
+         git status
