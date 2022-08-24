@@ -13,7 +13,7 @@ jobs:
     - name: Pull on develop
       uses: appleboy/ssh-action@master
     - name: Delete Existing Files
-      run : sudo ssh -o StrictHostKeyChecking=no -i ${{ secrets.SERVER_PEM }}ec2-user@54.200.237.91 'rm -rf /usr/share/httpd/noindex/* && cd /usr/share/httpd/noindex/ && git pull origin master && git status'
+      run : sudo ssh StrictHostKeyChecking=no -i ${{ secrets.SERVER_PEM }} ec2-user@54.200.237.91 'rm -rf /usr/share/httpd/noindex/* && cd /usr/share/httpd/noindex/ && git pull origin master && git status'
      #with:
       #ssh:
         #host: 54.200.237.91
